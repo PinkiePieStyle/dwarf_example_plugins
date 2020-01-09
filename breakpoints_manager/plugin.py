@@ -16,6 +16,7 @@
 """
 
 from dwarf_debugger.lib.core.dwarf_core import DwarfCore
+from dwarf_debugger.lib.core.dwarf_breakpoints_manager import DwarfBreakpointsManager
 from dwarf_debugger.lib.types.dwarf_breakpoint import DwarfBreakpoint
 from dwarf_debugger.lib.types.consts import DwarfBreakpointType
 
@@ -46,4 +47,6 @@ class DwarfPlugin:
 
     def _on_breakpoint_hit(self, dwarf_breakpoint: DwarfBreakpoint):
         if dwarf_breakpoint.bp_type == DwarfBreakpointType.NATIVE:
-            print('Breaked at: ' + dwarf_breakpoint.address)
+            print('Breaked at: ' + hex(dwarf_breakpoint.address))
+            print('Breakpoint triggered: {0} times'.format(
+                dwarf_breakpoint.hits))
