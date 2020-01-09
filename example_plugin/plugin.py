@@ -1,5 +1,5 @@
 """
-    Dwarf - Copyright (C) 2019 Giovanni Rocca (iGio90)
+    Dwarf - Copyright (C) 2018-2020 Giovanni Rocca (iGio90)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,10 +27,11 @@ from dwarf_debugger.lib.core.dwarf_api import DwarfApi
 
 
 class DwarfPlugin:
-    """
-    """
+    # simple dwarfplugin
 
     # required - also shown in PluginAboutDialog
+    # we have a german translation for the plugin so we extend plugin_info with 'languages'
+    # pluginmanager loads translation from 'lang' subfolder
     plugin_info = {
         'name': 'Example',
         'description': 'Hello World example Plugin',
@@ -88,6 +89,7 @@ class DwarfPlugin:
 
     def _on_hello_world(self):
         # show MessageBox
+        # we are using translate('what', 'english_fallback') here
         show_message_box(translate('hello_msg', 'Hello World'))
 
     def _on_core_sync(self, sync_data:dict):
@@ -131,6 +133,8 @@ class DwarfPlugin:
                         dwarf_breakpoint.remove()
 
     def _process_info_updated(self):
-        # process_info in dwarf_core has infos now
+        """
+            process_info in dwarf_core has infos now
+        """
         process_info:DwarfProcessInfo = self._dwarf_core.process_info
         print('Current Process: {0} - {1}'.format(process_info.name, process_info.process_id))
