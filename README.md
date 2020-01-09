@@ -25,7 +25,7 @@ copy the plugin to %HOMEDRIVE%%HOMEPATH%/.dwarf/plugins/
 ex:
 ```
 cd dwarf_example_plugins
-xcopy /I process_info %HOMEDRIVE%%HOMEPATH%\.dwarf\plugins\process_info
+xcopy /I /E process_info %HOMEDRIVE%%HOMEPATH%\.dwarf\plugins\process_info
 ```
 
 
