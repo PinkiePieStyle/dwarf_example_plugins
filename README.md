@@ -1,5 +1,4 @@
-# dwarf_example_plugins
-Simple Plugins for Dwarf > 2.0.0
+# Simple Plugins for Dwarf > 2.0.0
 
 https://github.com/iGio90/Dwarf
 
