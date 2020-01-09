@@ -1,0 +1,9 @@
+{
+    "info": {
+        "language": "german",
+        "autor": "Dwarf"
+    },
+    "translation": {
+        "hello_msg": "Hallo Welt"
+    }
+}
