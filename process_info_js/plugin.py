@@ -16,8 +16,6 @@
 """
 
 from dwarf_debugger.lib.core.dwarf_core import DwarfCore
-from dwarf_debugger.lib.core.dwarf_api import DwarfApi
-from dwarf_debugger.lib.core.dwarf_breakpoints_manager import DwarfBreakpointsManager
 
 
 class DwarfPlugin:
