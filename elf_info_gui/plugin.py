@@ -17,12 +17,12 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 
-from dwarf_debugger.lib.types.consts import DwarfPlatform
-from dwarf_debugger.lib.types.dwarf_process_info import DwarfProcessInfo
-from dwarf_debugger.lib.core.dwarf_core import DwarfCore
-from dwarf_debugger.lib.core.dwarf_api import DwarfApi
+from dwarf_debugger.types.consts import DwarfPlatform
+from dwarf_debugger.types.dwarf_process_info import DwarfProcessInfo
+from dwarf_debugger.core.dwarf_core import DwarfCore
+from dwarf_debugger.core.dwarf_api import DwarfApi
 from dwarf_debugger.ui.widgets.lists.dwarf_listview import DwarfListView
-from dwarf_debugger.lib.utils import get_main_window
+from dwarf_debugger.utils import get_main_window
 
 #TODO: untested
 
@@ -64,15 +64,16 @@ class DwarfPlugin:
         self._elf_mdl.setHeaderData(1, Qt.Horizontal, 'Value')
         self._main_widget.setModel(self._elf_mdl)
 
+        main_window = get_main_window()
+        if main_window:
+            main_window.utils_dock.add_widget(self._main_widget, 'ELFInfo')
+
     # ************************************************************************
     # **************************** Functions *********************************
     # ************************************************************************
     def _process_info_updated(self):
         if self._process_info.platform == DwarfPlatform.OS_LINUX:
             self._main_widget.clear()
-            main_window = get_main_window()
-            if main_window:
-                main_window.utils_dock.add_widget(self._main_widget, 'ELFInfo')
             self._elf_mdl.insertRow(
                 0, [QStandardItem('File'),
                     QStandardItem(self._process_info.name)])

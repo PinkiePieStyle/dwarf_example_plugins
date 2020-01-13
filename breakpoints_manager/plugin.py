@@ -15,10 +15,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>
 """
 
-from dwarf_debugger.lib.core.dwarf_core import DwarfCore
-from dwarf_debugger.lib.core.dwarf_breakpoints_manager import DwarfBreakpointsManager
-from dwarf_debugger.lib.types.dwarf_breakpoint import DwarfBreakpoint
-from dwarf_debugger.lib.types.consts import DwarfBreakpointType
+from dwarf_debugger.core.dwarf_core import DwarfCore
+from dwarf_debugger.manager.dwarf_breakpoints_manager import DwarfBreakpointsManager
+from dwarf_debugger.types.dwarf_breakpoint import DwarfBreakpoint
+from dwarf_debugger.types.consts import DwarfBreakpointType
 
 
 class DwarfPlugin:

@@ -17,13 +17,13 @@
 
 from PyQt5.QtWidgets import QMenu
 
-from dwarf_debugger.lib.utils import (translate, show_message_box)
+from dwarf_debugger.utils import (translate, show_message_box)
 
-from dwarf_debugger.lib.types.consts import DwarfBreakpointType
-from dwarf_debugger.lib.types.dwarf_breakpoint import DwarfBreakpoint
-from dwarf_debugger.lib.types.dwarf_process_info import DwarfProcessInfo
-from dwarf_debugger.lib.core.dwarf_core import DwarfCore
-from dwarf_debugger.lib.core.dwarf_api import DwarfApi
+from dwarf_debugger.types.consts import DwarfBreakpointType
+from dwarf_debugger.types.dwarf_breakpoint import DwarfBreakpoint
+from dwarf_debugger.types.dwarf_process_info import DwarfProcessInfo
+from dwarf_debugger.core.dwarf_core import DwarfCore
+from dwarf_debugger.core.dwarf_api import DwarfApi
 
 
 class DwarfPlugin:

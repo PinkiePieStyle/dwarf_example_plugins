@@ -2,10 +2,10 @@
     DwarfPluginTemplate
 """
 
-from dwarf_debugger.lib.utils import (translate, dwarf_log, is_core)
-from dwarf_debugger.lib.types.consts import DwarfLogType
-from dwarf_debugger.lib.core.dwarf_core import DwarfCore
-from dwarf_debugger.lib.core.dwarf_api import DwarfApi
+from dwarf_debugger.utils import (translate, dwarf_log, is_core)
+from dwarf_debugger.types.consts import DwarfLogType
+from dwarf_debugger.core.dwarf_core import DwarfCore
+from dwarf_debugger.core.dwarf_api import DwarfApi
 
 
 class DwarfPlugin:

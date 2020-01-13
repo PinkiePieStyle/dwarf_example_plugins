@@ -15,7 +15,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>
 """
 
-from dwarf_debugger.lib.core.dwarf_core import DwarfCore
+from dwarf_debugger.core.dwarf_core import DwarfCore
 
 
 class DwarfPlugin:
