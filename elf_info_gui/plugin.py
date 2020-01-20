@@ -21,10 +21,9 @@ from dwarf_debugger.types.consts import DwarfPlatform
 from dwarf_debugger.types.dwarf_process_info import DwarfProcessInfo
 from dwarf_debugger.core.dwarf_core import DwarfCore
 from dwarf_debugger.core.dwarf_api import DwarfApi
-from dwarf_debugger.ui.widgets.lists.dwarf_listview import DwarfListView
+from dwarf_debugger.ui.lists.dwarf_listview import DwarfListView
 from dwarf_debugger.utils import get_main_window
 
-#TODO: untested
 
 class DwarfPlugin:
     """ DwarfPlugin
@@ -45,6 +44,10 @@ class DwarfPlugin:
     # **************************** Init **************************************
     # ************************************************************************
     def __init__(self, dwarf_core: DwarfCore):
+        # process_info is empty at __init__ so we must
+        # connect to process_info onChanged wich is emitted
+        # after core is attached to a process
+
         self._process_info: DwarfProcessInfo = dwarf_core.process_info
         self._process_info.onChanged.connect(self._process_info_updated)
 
@@ -68,20 +71,25 @@ class DwarfPlugin:
         if main_window:
             main_window.utils_dock.add_widget(self._main_widget, 'ELFInfo')
 
+
     # ************************************************************************
     # **************************** Functions *********************************
     # ************************************************************************
     def _process_info_updated(self):
         if self._process_info.platform == DwarfPlatform.OS_LINUX:
             self._main_widget.clear()
+
             self._elf_mdl.insertRow(
                 0, [QStandardItem('File'),
                     QStandardItem(self._process_info.name)])
-            self._dwarf_api.evaluateFunction('parse_elf_file()')
 
     def _on_sync(self, sync_data: dict):
         if 'elf_info' in sync_data and isinstance(sync_data['elf_info'], dict):
             self._process_data(sync_data['elf_info'])
+
+    def on_script_loaded(self, loaded:bool):
+        if loaded:
+            self._dwarf_api.evaluateFunction('parse_elf_file()')
 
     def _process_data(self, elf_info_json: dict):
         parent_item = self._elf_mdl.item(0)
@@ -129,11 +137,11 @@ class DwarfPlugin:
         if 'programheaders' in elf_info_json:
             prog_headers_item = QStandardItem('Program Headers')
             parent_item.appendRow([prog_headers_item])
-            counter = 1
+            i = 1
             for header in elf_info_json['programheaders']:
-                header_item = QStandardItem("%d" % counter)
+                header_item = QStandardItem("%d" % i)
                 prog_headers_item.appendRow([header_item])
-                counter += 1
+                i += 1
                 for entry in header:
                     header_item.appendRow([
                         QStandardItem(entry),
@@ -143,12 +151,14 @@ class DwarfPlugin:
         if 'sectionheaders' in elf_info_json:
             sect_headers = QStandardItem('Section Headers')
             parent_item.appendRow([sect_headers])
+            i = 1
             for header in elf_info_json['sectionheaders']:
                 txt = header['name']
                 if not txt:
                     txt = 'NULL'
                 header_item = QStandardItem(txt)
                 sect_headers.appendRow([header_item])
+                i += 1
                 for entry in header:
                     if entry == 'name':
                         continue
