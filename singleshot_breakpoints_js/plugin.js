@@ -21,6 +21,7 @@ var dwarfApi = Dwarf.getApi();
 create Breakpoint
 var dwarfBreakpoint = Dwarf.getBreakpointManager().addNativeBreakpoint(findExport('open'));
 var dwarfBreakpoint = dwarfApi.addNativeBreakpoint(findExport('open'));
+var dwarfBreakpoint = addBreakpoint('native', findExport('open'));
 */
 var dwarfBreakpoint = dwarfApi.addBreakpoint('native', findExport('open'));
 
